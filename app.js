@@ -22,10 +22,13 @@ app.set('views', path.join(__dirname, 'views'))
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars')
 
-/**
- * Get user input or req.body
- * fetch the api using the query url wit app_id adn secerted_key from github
- */
+app.get('/', (req, res) => {
+        res.render('home')
+    })
+    /**
+     * Get user input or req.body
+     * fetch the api using the query url wit app_id adn secerted_key from github
+     */
 app.post('/', async(req, res) => {
     const user = req.body.user;
     //get client_id and client_secret from proce.evn
