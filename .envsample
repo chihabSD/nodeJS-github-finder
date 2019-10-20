@@ -1,0 +1,4 @@
+ #Please rename this to .env then include this in app.js 
+
+ client_id = your github client id goes here
+ client_secret = your github secret key goes here

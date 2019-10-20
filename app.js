@@ -1,15 +1,11 @@
 const express = require('express')
 const path = require('path');
-var keypress = require('keypress');
-const readline = require('readline');
 var exphbs = require('express-handlebars');
-var request = require('request');
 var bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 require('dotenv').config;
 
-//console.log(process.env)
-// define express app
+
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -26,37 +22,34 @@ app.set('views', path.join(__dirname, 'views'))
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars')
 
-
-// const profileResponse = await fetch(`https://api.github.com/users/${user}?client_id=${this.client_id}&client_secret=${this.client_secret}`)
-//         const repoResponse = await fetch(`https://api.github.com/users/${user}/repos?per_page=${this.repos_count}&sort=${this.repos_sort}&client_id=${this.client_id}&client_secret=${this.client_secret}`);
-var options = {
-    url: 'https://api.github.com/repos/request/request',
-    headers: {
-        'User-Agent': 'request'
-    }
-};
-
-
-
+/**
+ * Get user input or req.body
+ * fetch the api using the query url wit app_id adn secerted_key from github
+ */
 app.post('/', async(req, res) => {
     const user = req.body.user;
-    const client_id = process.env.client_id //GitHub client id
-    const client_secret = process.env.client_secret //GitHub secret key
+    //get client_id and client_secret from proce.evn
+    const client_id = process.env.client_id
+    const client_secret = process.env.client_secret
     let status;
     await fetch(`https://api.github.com/users/${user}?client_id=${client_id}&client_secret=${client_secret}`)
+        //return a response    
         .then((res) => {
             status = res.status;
             return res.json()
         })
+        // get the data as an object
         .then((jsonData) => {
+            //pass the data to the home.handlebars
             console.log('Json data', jsonData);
             res.render('home', { jsonData: jsonData })
         })
+        //return if there is an error
         .catch((err) => {
             // handle error for example
             console.error(err);
         });
-    //res.render('home', { user: req.body.user })
+
 })
 
 
