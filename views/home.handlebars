@@ -1,0 +1,65 @@
+<nav class="navbar navbar-dark bg-primary mb-3">
+  <div class="container">
+    <a href="#" class="navbar-brand">Github Finder </a>
+  </div>
+</nav>
+
+<div class="container searchContainer">
+  <div class="search card card-body">
+    <h1>Search Github Users</h1>
+    <p class="lead">Enter a username to fetch user profile and repos</p>
+    {{!-- <input type="text" id="searchUser" class="form-control" placeholder="Github Username"> --}}
+    {{!-- <div class="row">
+   <div class="col-lg-12">
+    <div class="input-group input-group-lg">
+      <input type="text" class="form-control input-lg" id="search-church" placeholder="Github Username">
+      <span class="input-group-btn">
+        <button class="btn btn-default btn-lg btn-primary ml-1" type="submit">Search</button>
+      </span>
+    </div>
+  </div>
+</div> --}}
+
+    <form class="form-inline" method="POST" action="/">
+
+      <div class="form-group mx-sm-3 mb-2">
+
+        <input type="text" name="user" class="form-control input-lg" id="search-church" placeholder="Github Username">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+
+  </div>
+  <br>
+  <div id="profile">
+    <div class="card card-body mb-3"> 
+          <div class="row">
+            <div class="col-md-3">
+              <img class="img-fluid mb-2" src="{{jsonData.avatar_url}}">
+              <a href="${user.html_url}" target="_blank" class="btn btn-primary btn-block">View Profile</a>
+            </div>
+        
+        <div class="col-md-6">
+            <span class="badge badge-success">Public Repos: {{jsonData.public_repos}}</span>
+            <span class="badge badge-warning">Public Gists: {{jsonData.public_gists}}</span>
+            <span class="badge badge-primary">Followers: {{jsonData.followers}}</span>
+            <span class="badge badge-info">Following: {{jsonData.following}}</span>
+            <br><br>
+              <ul id="myList" class="list-group">
+                <li class="list-group-item">Company: {{jsonData.company}}</li>
+                <li class="list-group-item">website/Blog: {{jsonData.blog}}</li>
+                <li class="list-group-item">Location: {{jsonData.location}}</li>
+                <li class="list-group-item">Member since: {{jsonData.created_at}}</li>
+             </ul>
+        </div>
+        </div>
+        </div>
+        <h3 class="page-heading mb-3">Latest Repos</h3>
+        <div id="repos"></div>
+  </div>
+
+  <footer class="mt-5 p-3 text-center bg-light">
+    Github Finder &copy; 2019
+  </footer>
+
+</div>
